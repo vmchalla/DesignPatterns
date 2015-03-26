@@ -1,5 +1,8 @@
 package com.vmchalla.main;
 
+import com.vmchalla.designpattern.creational.abstractfactory.EmailAlertAF;
+import com.vmchalla.designpattern.creational.abstractfactory.PaperAlertAF;
+import com.vmchalla.designpattern.creational.abstractfactory.SmsAlertAF;
 import com.vmchalla.designpattern.creational.factory.AlertsFactory;
 import com.vmchalla.designpattern.creational.factory.data.AlertsData;
 import com.vmchalla.main.service.BreakSingleton;
@@ -63,7 +66,18 @@ public class MainStub {
 		System.out.println("Was email sent :"+ isEmailSent);
 		
 		boolean didWeWastePaper = AlertsFactory.getInstance().sendAlert(paperMail);
-		System.out.println("Were trees destroyed because of our foolishness " + didWeWastePaper);
+		System.out.println("Were trees destroyed because of our foolishness: " + didWeWastePaper);
+		
+		//-----------------------------------Abstract Factory DP ---------------------------------------------------
+		
+		//Here there is no if-else logic to decipher the implementation 
+		//The client code specifies the factory name which in-turn calls the implementation code.
+		
+		//reusing the existing AlertsData - show do the same thing as factory ...
+		com.vmchalla.designpattern.creational.abstractfactory.AlertsFactory.sendAlert(sms,new SmsAlertAF());
+		com.vmchalla.designpattern.creational.abstractfactory.AlertsFactory.sendAlert(email, new EmailAlertAF());
+		com.vmchalla.designpattern.creational.abstractfactory.AlertsFactory.sendAlert(paperMail, new PaperAlertAF());
+		
 		
 		
 

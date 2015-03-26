@@ -13,7 +13,7 @@ public class PaperAlert extends Alert {
 	public boolean processAlert(AlertsData alert) {
 		//Each stage of processing might set this boolean to false.
 				boolean isProcessedSucessfully = true;
-				System.out.println("Processing Email Alert");
+				System.out.println("Processing Address Alert");
 				System.out.println("Message :" +alert.getMessage());
 				System.out.println("Address :"+ alert.getAddress());
 				
