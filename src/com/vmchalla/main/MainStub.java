@@ -3,6 +3,8 @@ package com.vmchalla.main;
 import com.vmchalla.designpattern.creational.abstractfactory.EmailAlertAF;
 import com.vmchalla.designpattern.creational.abstractfactory.PaperAlertAF;
 import com.vmchalla.designpattern.creational.abstractfactory.SmsAlertAF;
+import com.vmchalla.designpattern.creational.builder.FoodProduct;
+import com.vmchalla.designpattern.creational.builder.FoodProduct.FoodProductBuilder;
 import com.vmchalla.designpattern.creational.factory.AlertsFactory;
 import com.vmchalla.designpattern.creational.factory.data.AlertsData;
 import com.vmchalla.main.service.BreakSingleton;
@@ -77,6 +79,31 @@ public class MainStub {
 		com.vmchalla.designpattern.creational.abstractfactory.AlertsFactory.sendAlert(sms,new SmsAlertAF());
 		com.vmchalla.designpattern.creational.abstractfactory.AlertsFactory.sendAlert(email, new EmailAlertAF());
 		com.vmchalla.designpattern.creational.abstractfactory.AlertsFactory.sendAlert(paperMail, new PaperAlertAF());
+		
+		//----------------------------------------Builder DP--------------------------------------------------------
+		//Say we need a food product called idly
+		//Building the product
+		
+		//Say we get product id , type and name in a flat file.
+		System.out.println("Recieved product Id, type and name from upstram in a flat file.");
+		FoodProductBuilder idlyBuilder = new FoodProductBuilder("idly_023", "4 min Meal", "Make Idly in 4 minutes");
+		
+		//Now we query database with given Id to get the other details.
+		System.out.println("queried database and got further information regarding the food product to build");
+		idlyBuilder = idlyBuilder.category("IndianFood").department("Heat and Eat").isAvailable(true).isFrozen(true).isSeasonal(false);
+		
+		System.out.println("Now we make a web service call to third party to get more details");
+		idlyBuilder = idlyBuilder.soldBy("MTR").saleUnit("EA").nutritionalFacts("Healthy");
+		
+		//I know you might be thinking of price ... Its free :P
+		
+		//Here is the immutable product.
+		final FoodProduct idly = idlyBuilder.buildFoodProduct();
+		
+		System.out.println("Heres our product: "+idly.getProductName());
+		System.out.println("Here are the details :" +idly.toString());
+		System.out.println("This object is immutable... :) ");
+		
 		
 		
 		
