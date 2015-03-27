@@ -7,6 +7,8 @@ import com.vmchalla.designpattern.creational.builder.FoodProduct;
 import com.vmchalla.designpattern.creational.builder.FoodProduct.FoodProductBuilder;
 import com.vmchalla.designpattern.creational.factory.AlertsFactory;
 import com.vmchalla.designpattern.creational.factory.data.AlertsData;
+import com.vmchalla.designpattern.creational.prototype.TruckData;
+import com.vmchalla.designpattern.creational.prototype.TruckUtil;
 import com.vmchalla.main.service.BreakSingleton;
 import com.vmchalla.main.service.DemoSingletons;
 
@@ -19,10 +21,11 @@ import com.vmchalla.main.service.DemoSingletons;
  */
 public class MainStub {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CloneNotSupportedException {
 		
 		//----------------------------------------Singleton DP-------------------------------------------------------------
-		
+		System.out.println("------------------SINGLETON PATTERN-----------------------------");
+		System.out.println(" \n ");
 		//Initializing the service
 		DemoSingletons demo = new DemoSingletons();
 		//-------------------------Static Block Singleton -------------------------
@@ -41,7 +44,9 @@ public class MainStub {
 		BreakSingleton.notSingletonAnymoreDemo();
 		
 		//------------------------------------------Factory DP --------------------------------------------------------------
-		
+		System.out.println(" \n ");
+		System.out.println("------------------FACTORY PATTERN-----------------------------");
+		System.out.println(" \n ");
 		//Create 3 different alerts data
 		
 		AlertsData sms = new AlertsData();
@@ -71,7 +76,9 @@ public class MainStub {
 		System.out.println("Were trees destroyed because of our foolishness: " + didWeWastePaper);
 		
 		//-----------------------------------Abstract Factory DP ---------------------------------------------------
-		
+		System.out.println(" \n ");
+		System.out.println("------------------ABSTRACT FACTORY PATTERN-----------------------------");
+		System.out.println(" \n ");
 		//Here there is no if-else logic to decipher the implementation 
 		//The client code specifies the factory name which in-turn calls the implementation code.
 		
@@ -81,6 +88,9 @@ public class MainStub {
 		com.vmchalla.designpattern.creational.abstractfactory.AlertsFactory.sendAlert(paperMail, new PaperAlertAF());
 		
 		//----------------------------------------Builder DP--------------------------------------------------------
+		System.out.println(" \n ");
+		System.out.println("------------------BUILDER PATTERN-----------------------------");
+		System.out.println(" \n ");
 		//Say we need a food product called idly
 		//Building the product
 		
@@ -95,7 +105,7 @@ public class MainStub {
 		System.out.println("Now we make a web service call to third party to get more details");
 		idlyBuilder = idlyBuilder.soldBy("MTR").saleUnit("EA").nutritionalFacts("Healthy");
 		
-		//I know you might be thinking of price ... Its free :P
+		//I know you might be thinking of price ... Its free promotion!!!  :P
 		
 		//Here is the immutable product.
 		final FoodProduct idly = idlyBuilder.buildFoodProduct();
@@ -104,9 +114,34 @@ public class MainStub {
 		System.out.println("Here are the details :" +idly.toString());
 		System.out.println("This object is immutable... :) ");
 		
+		//-------------------------------------Prototype Pattern--------------------------------------------
+		System.out.println(" \n ");
+		System.out.println("------------------PROTOTYPE PATTERN-----------------------------");
+		System.out.println(" \n ");
+		//Load the Truck Data from Database.
+		TruckData truckFromDB = TruckUtil.loadTruckData();
+		
+		System.out.println(truckFromDB.toString());
+		
+		//Clone the truckFromDB 
+		TruckData clonedTruck = (TruckData)truckFromDB.clone();
+		System.out.println(clonedTruck.toString());
+		//Send the original one to plant
+		boolean isTruckSentToDispatch = TruckUtil.processTruckForPlant(truckFromDB);
+		
+		System.out.println("After Processing in plant ");
+		System.out.println("Original truck from DB");
+		System.out.println(truckFromDB.toString());
+		System.out.println("cloned Truck From DB");
+		System.out.println(clonedTruck.toString());
 		
 		
-		
+		if(isTruckSentToDispatch){
+			TruckUtil.processTruckForDispatch(clonedTruck);
+		}
+		System.out.println("After Processing in dispatch ");
+		System.out.println("cloned Truck From DB");
+		System.out.println(clonedTruck.toString());
 
 	}
 
