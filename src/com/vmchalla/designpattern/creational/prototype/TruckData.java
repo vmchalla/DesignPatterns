@@ -3,7 +3,12 @@ package com.vmchalla.designpattern.creational.prototype;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * This class is built using prototype design pattern.
+ * The class implements the cloneable interface.
+ * @author vmohanchalla
+ *
+ */
 public class TruckData implements Cloneable {
 
 	private Employee driver;
