@@ -1,5 +1,8 @@
 package com.vmchalla.main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.vmchalla.designpattern.creational.abstractfactory.EmailAlertAF;
 import com.vmchalla.designpattern.creational.abstractfactory.PaperAlertAF;
 import com.vmchalla.designpattern.creational.abstractfactory.SmsAlertAF;
@@ -9,6 +12,8 @@ import com.vmchalla.designpattern.creational.factory.AlertsFactory;
 import com.vmchalla.designpattern.creational.factory.data.AlertsData;
 import com.vmchalla.designpattern.creational.prototype.TruckData;
 import com.vmchalla.designpattern.creational.prototype.TruckUtil;
+import com.vmchalla.designpattern.structural.adapter.IOrderProcessor;
+import com.vmchalla.designpattern.structural.adapter.OrderProcessorAdapter;
 import com.vmchalla.main.service.BreakSingleton;
 import com.vmchalla.main.service.DemoSingletons;
 
@@ -142,6 +147,33 @@ public class MainStub {
 		System.out.println("After Processing in dispatch ");
 		System.out.println("cloned Truck From DB");
 		System.out.println(clonedTruck.toString());
+		
+		//-----------------------------Adapter Pattern ----------------------------------------------------
+		System.out.println(" \n ");
+		System.out.println("------------------ADAPTER PATTERN-----------------------------");
+		System.out.println(" \n ");
+		
+		//A hashmap of orderIds and locations
+		
+		Map<String, String> ordersAndLocations = new HashMap<String, String>();
+		ordersAndLocations.put("123WE33EW", "Manhatten");
+		ordersAndLocations.put("648FDF45R", "Bronx");
+		ordersAndLocations.put("3REE6R6FRD", "Brooklyn");
+		ordersAndLocations.put("4D5TY6R3EC", "Manhatten");
+		ordersAndLocations.put("VVDF5EFCU7", "Brooklyn");
+		ordersAndLocations.put("4D5FJKM1WSX", "Bronx");
+		ordersAndLocations.put("8UJKJI0OKGZ", "Queens");
+		
+		System.out.println("Client sending hashmap to adapter interface");
+		IOrderProcessor processor = new OrderProcessorAdapter();
+		boolean isProcessingSuccessful=false;
+		try {
+			isProcessingSuccessful = processor.processOrders(ordersAndLocations);
+		} catch (Throwable t) {
+			System.out.println("Exception could not process orders");
+		}
+		
+		System.out.println("Processed Orders successfully: "+isProcessingSuccessful);
 
 	}
 
