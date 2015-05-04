@@ -3,6 +3,7 @@ package com.vmchalla.main;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.vmchalla.designpattern.behavioural.observer.AvailabilityService;
 import com.vmchalla.designpattern.creational.abstractfactory.EmailAlertAF;
 import com.vmchalla.designpattern.creational.abstractfactory.PaperAlertAF;
 import com.vmchalla.designpattern.creational.abstractfactory.SmsAlertAF;
@@ -174,6 +175,15 @@ public class MainStub {
 		}
 		
 		System.out.println("Processed Orders successfully: "+isProcessingSuccessful);
+		
+		//---------------------------------Observer Pattern --------------------------------
+		System.out.println(" \n ");
+		System.out.println("------------------OBSERVER PATTERN-----------------------------");
+		System.out.println(" \n ");
+		AvailabilityService availabilityService = new AvailabilityService(400);
+		System.out.println("Current Availability : "+availabilityService.getCurrentAvailability());
+		availabilityService.notifyAvailabilityChange(346);
+		System.out.println("Current Availability after Update : "+availabilityService.getCurrentAvailability());
 
 	}
 
