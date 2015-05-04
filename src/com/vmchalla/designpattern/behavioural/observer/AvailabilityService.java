@@ -1,5 +1,10 @@
 package com.vmchalla.designpattern.behavioural.observer;
-
+/**
+ * this service is called whenever there is a change in availability of the product
+ * 
+ * @author vmohanchalla
+ *
+ */
 public class AvailabilityService {
 	
 	private ProductAvailability productAvailability;

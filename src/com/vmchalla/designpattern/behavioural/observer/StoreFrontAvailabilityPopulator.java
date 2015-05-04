@@ -2,7 +2,12 @@ package com.vmchalla.designpattern.behavioural.observer;
 
 import java.util.Observable;
 import java.util.Observer;
-
+/**
+ * This class is an observer for ProductAvailability and updates the 
+ * store-front properties
+ * @author vmohanchalla
+ *
+ */
 public class StoreFrontAvailabilityPopulator implements Observer{
 	
 	private ProductAvailability availabilityReport=null;
